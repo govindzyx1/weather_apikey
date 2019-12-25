@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="3265-weather-api-key">
+    <Basepaths>/weather-api-key</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1559321170971</CreatedAt>
+    <CreatedBy>verma.govind92@gmail.com</CreatedBy>
+    <Description>Weather</Description>
+    <DisplayName>Weather</DisplayName>
+    <LastModifiedAt>1559321170971</LastModifiedAt>
+    <LastModifiedBy>verma.govind92@gmail.com</LastModifiedBy>
+    <ManifestVersion>SHA-512:9e9833a5f331c77ec7adc922dfd208dcea2a75f82a864a58534da95029af68cd6fbab0d321e5634e8837671f0b0a9a3c7ded4b691a58fd6e578cc88b0e035710</ManifestVersion>
+    <Policies>
+        <Policy>Extract-Operation-Name</Policy>
+        <Policy>Invalid-SOAP</Policy>
+        <Policy>Raise-Fault-Product</Policy>
+        <Policy>Verify-API-Key-1</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

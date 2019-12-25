@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description>Weather</Description>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>Invalid-SOAP</Name>
+                <Condition>!(request.header.Content-Type ~~ "(text|application)\/(xml|([a-z]*\+xml))(;(\w)*=(\S*))?")</Condition>
+            </Step>
+            <Step>
+                <Name>Extract-Operation-Name</Name>
+            </Step>
+            <Step>
+                <Name>Invalid-SOAP</Name>
+                <Condition>(envelope != "Envelope") or (body != "Body") or (envelopeNamespace !="http://schemas.xmlsoap.org/soap/envelope/")</Condition>
+            </Step>
+            <Step>
+                <Name>Verify-API-Key-1</Name>
+            </Step>
+            <Step>
+                <Name>Raise-Fault-Product</Name>
+                <Condition>(operation Like "{verifyapikey.Verify-API-Key-1.apiproduct.allowedOperations}")</Condition>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+        <Flow name="GetCityWeatherByZIP">
+            <Description>GetCityWeatherByZIP</Description>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/") and (request.verb = "POST") and (operation = "GetCityWeatherByZIP")</Condition>
+        </Flow>
+        <Flow name="GetCityForecastByZIP">
+            <Description>GetCityForecastByZIP</Description>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/") and (request.verb = "POST") and (operation = "GetCityForecastByZIP")</Condition>
+        </Flow>
+        <Flow name="GetWeatherInformation">
+            <Description>GetWeatherInformation</Description>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/") and (request.verb = "POST") and (operation = "GetWeatherInformation")</Condition>
+        </Flow>
+        <Flow name="unknown-resource">
+            <Description>Unknown Resource</Description>
+            <Request>
+                <Step>
+                    <Name>Invalid-SOAP</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition/>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/weather-api-key</BasePath>
+        <Properties/>
+        <VirtualHost>secure</VirtualHost>
+        <VirtualHost>default</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>
